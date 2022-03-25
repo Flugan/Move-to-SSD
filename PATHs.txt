@@ -1,0 +1,16 @@
+c:\Program Files (x86)\Steam\steamapps\common
+D:\SteamLibrary\steamapps\common
+E:\SteamLibrary\steamapps\common
+G:\SteamLibrary\steamapps\common
+G:\EA
+G:\Ubisoft Connect
+G:\Blizzard
+G:\Games
+G:\Epic Games
+G:\DOSBOX
+G:\XboxGames
+G:\GOG
+
+d:\EA
+d:\Epic
+d:\Uplay
