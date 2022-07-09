@@ -333,44 +333,10 @@ namespace Move_to_SSD {
 
 			if (Directory.Exists(hddPath))
 				Directory.Delete(hddPath, true);
-			if (timeNew == timeOld) {
-				Directory.Move(hddPath + "-HDD", hddPath);
-			} else {
-				UpdateHDD(hddPath, timeOld, diSSD);
-				Directory.Delete(hddPath + "-HDD", true);
-			}
+			Directory.Move(hddPath + "-HDD", hddPath);
 			File.Delete(path + ".txt");
 			Directory.Delete(path, true);
 			updateSSD(SelectSSD.Text);
-		}
-
-		private void UpdateHDD(string hddPath, string timeOld, DirectoryInfo diSSD) {
-			string gameName = hddPath.Substring(hddPath.LastIndexOf('\\') + 1);
-			string pathName = diSSD.FullName.Substring(9).Replace(gameName, "");
-			string destination = hddPath + pathName;
-			Directory.CreateDirectory(destination);
-			foreach (var dir in diSSD.EnumerateDirectories()) {
-				string dirName = dir.FullName.Replace(dir.FullName.Substring(0, 9) + gameName, "");
-				if (String.Compare(dir.LastWriteTimeUtc.ToString(), timeOld) > 0) {
-					UpdateHDD(hddPath, timeOld, dir);
-				} else {
-					string from = hddPath + "-HDD" + dirName;
-					string to = hddPath + dirName;
-					Directory.Move(from, to);
-				}
-			}
-			foreach (var file in diSSD.EnumerateFiles()) {
-				string fileName = file.FullName.Replace(file.FullName.Substring(0, 9) + gameName, "");
-				if (String.Compare(file.LastWriteTimeUtc.ToString(), timeOld) > 0) {
-					string from = file.FullName;
-					string to = hddPath + fileName;
-					File.Copy(from, to);
-				} else {
-					string from = hddPath + "-HDD" + fileName;
-					string to = hddPath + fileName;
-					File.Move(from, to);
-				}
-			}
 		}
 	}
 
